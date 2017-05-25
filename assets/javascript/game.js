@@ -1,17 +1,35 @@
 
 
 var listWords = ["cow", "fish" , "bird"];
+var numGuesses = 0;
 var word = getRandomWord();
+var guessLimit = 0;
+var underScores = [];
 var wGuess = [];
 var docGuess = document.getElementById("docGuess"); //variable to store 
+var remGuess = document.getElementById("remGuess");
+var docWord = document.getElementById("word");
 
-
+remGuess.innerHTML = setLimit().toString();
 console.log(word);
+makeUnderscores();
+docWord.innerHTML = underScores.join(" ");
+
+function setLimit(){
+	guessLimit = word.length * 1.5;
+	
+	return Math.floor(guessLimit);
+}
+
+ function makeUnderscores(){
+	for(var i=0; i < word.length; i++){
+		underScores[i] = "-";
+	}
+	
+};
 
 var displayGuesses = function(){
-	for(i=0; i< wGuess.length; i++){
-		return wGuess[i];
-	}
+	docGuess.innerHTML = wGuess;
 };
 
 
@@ -23,16 +41,26 @@ function getRandomWord(){
 
 document.onkeyup = function(event){
 	var guess = event.key;
-	// console.log(guess);
-	// console.log(typeof guess);
 
-	if(word.indexOf(guess) == -1){
-		wGuess.push(guess);
-		var letter = document.createElement(displayGuesses);
-		docGuess.appendChild(letter);
-	}
+		
+		if(word.indexOf(guess) == -1){
+			
+			if(wGuess.indexOf(guess) != -1){
+				console.log("you guess that");
+			}
+			else{
+				wGuess.push(guess);
+				displayGuesses();
+				guessLimit--;
+				remGuess.innerHTML = guessLimit;
+			}
 
-	else{
-		console.log("Correct: " + guess);
-	}
+		}
+
+		else{
+			var x = word.indexOf(guess);
+			underScores[x] = guess;
+			docWord.innerHTML = underScores.join(" ");
+
+		}
 };
