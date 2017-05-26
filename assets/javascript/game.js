@@ -10,6 +10,7 @@ var docGuess = document.getElementById("docGuess"); 		//span to show list of gue
 var remGuess = document.getElementById("remGuess");			//span for remaining guesses
 var docWord = document.getElementById("word");					//span for displaying underscores/word
 var nButton = document.getElementById("nButton");				//button to start new game when old game ends
+var docStat = document.getElementById("status");
 
 nButton.addEventListener("click", function(){						//listener for newgame button
 	newGame();																						//calls function newgame when button clicked
@@ -79,6 +80,26 @@ function getRandomWord(){
 	return randWord;
  };	
 
+
+ function retMessage(x){
+ 		switch(x){
+
+ 			case 1: 
+ 			return("You already guessed this Letter, Try Another");
+
+ 			case 2:
+ 			return("Only Letters Are accepted");
+
+ 			case 3: 
+ 			return("Game Over: Select a new game to play again");
+
+ 			case 4:
+ 			return("You Win!! Select a new game to play again");
+
+
+ 		}
+ };
+
 //---------------BEGINNING OF GAME LOGIC---------------------------
 
 newGame();																							//begins game when page loads
@@ -93,11 +114,12 @@ document.onkeyup = function(event){
 		
 	if((remainGuess <= 0) || (corCount >= word.length)){		//Checks if player still has remaining turns or has won game
 		
-		console.log("Start A New Game to continue");
+		docStat.innerHTML = retMessage(3);
 	}
 
 	else{
 		if(re.test(guess) == false){										//Test if something other than a letter is inputed
+			docStat.innerHTML = retMessage(2);
 			console.log("Only letters are accepted");			//(unfortunatily this is not working for arrow keys)
 		}
 		else{
@@ -105,7 +127,8 @@ document.onkeyup = function(event){
 																										//if true the guess is not in the word
 				
 				if(wGuess.indexOf(guess) != -1){						//condiditon statment to check if guess is in array of guesses
-					console.log("you guess that");
+				docStat.innerHTML = retMessage(1);
+				console.log("You already guessed that");
 				}
 
 				else{									
@@ -122,10 +145,10 @@ document.onkeyup = function(event){
 				docWord.innerHTML = underScores.join("");		//updates the html to show letter in correct spot of word
 
 					if(corCount == word.length){
-						console.log("You win");
+						docStat.innerHTML = retMessage(4);
 					}
 					else{
-						//Do Nothing
+						//Do Nothing 
 					}
 
 			}
