@@ -1,6 +1,6 @@
 
 
-var listWords = ["cow", "fish" , "bird", "silly", "cheese doodle"];								//array of words							
+var listWords = ["giraffe","llamma","alpaca","sloth",""];								//array of words							
 var word = "";																					//sets word to random word
 var remainGuess = 0;																		//variable to store limit of guesses based on word length
 var corCount = 0;
@@ -57,7 +57,8 @@ function setNumGuess(){
 function swapUnderscores(guess){											
 	for(var i=0;i<word.length;i++){												//loop through word based on length of word
 		if(guess == word.charAt(i)){												//check if guess is equal to character in word
-			underScores[i] = guess;														//if it is the same place guess in that place in function
+			underScores[i] = guess;													//if it is the same place guess in that place in function
+			corCount++;
 			}	
 		else{
 			//Do Nothing
@@ -117,7 +118,6 @@ document.onkeyup = function(event){
 			}
 
 			else{																					//guess was correct
-				corCount++;
 				swapUnderscores(guess);											//changes value of underscore array to correct letter
 				docWord.innerHTML = underScores.join("");		//updates the html to show letter in correct spot of word
 
