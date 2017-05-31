@@ -1,6 +1,6 @@
 
 
-var listWords = ["giraffe","llamma","alpaca","sloth",""];								//array of words							
+var listWords = ["giraffe","llamma","alpaca","sloth","monkey"];								//array of words							
 var word = "";																					//sets word to random word
 var remainGuess = 0;																		//variable to store limit of guesses based on word length
 var corCount = 0;
@@ -13,7 +13,7 @@ var nButton = document.getElementById("nButton");				//button to start new game 
 var docStat = document.getElementById("status");
 
 nButton.addEventListener("click", function(){						//listener for newgame button
-	newGame();																						//calls function newgame when button clicked
+	newGame();																			//calls function newgame when button clicked
 });	
 
 //Sets up a new Game
@@ -36,7 +36,7 @@ function setNumGuess(){
 	remainGuess = Math.floor(word.length * 1.5);					//sets limit equal to 1.5 times the length of word
 	
 	return remainGuess;
-}
+};
 
 //Function to populate array with underscores
 //based on word length
